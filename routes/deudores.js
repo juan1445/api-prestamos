@@ -7,6 +7,13 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
+    let deudor = new Deudor(req.body)
+
+     deudor.save(async (err, deudorStored) => {
+         if (err) res.status(500).send({ message: `Error al guardar en la base de datos: ${err}` })
+        res.status(200).send({ deudor: deudorStored })
+    })
+
     const deudores = await Deudor.find().sort('-_id');
     res.json(deudores);
     console.log(req.body)
@@ -30,12 +37,7 @@ router.post('/register', async (req, res) => {
 
     
 
-    // let deudor = new Deudor(req.body)
 
-    // deudor.save(async (err, deudorStored) => {
-    //     if (err) res.status(500).send({ message: `Error al guardar en la base de datos: ${err}` })
-    //     res.status(200).send({ deudor: deudorStored })
-    // })
 
 })
 
