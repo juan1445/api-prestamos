@@ -36,7 +36,7 @@ app.use(express.json());
 app.use('/public', express.static(path.join(__dirname, './public')));
 
 // routes
-app.use('/api/prestamo', require('./routes/deudores'));
+app.use('/', require('./routes/deudores'));
 app.use('/', require('./routes/requirements'));
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/login'));

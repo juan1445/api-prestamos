@@ -3,33 +3,39 @@ const router = Router();
 const Deudor = require('../models/Deudor');
 
 router.get('/', async (req, res) => {
-    const deudores = await Deudor.find().sort('-_id');
-    res.json(deudores);
+    res.render('partials/register')
 });
 
-router.post('/', async (req, res) => {
-    console.log('POST api/prestamo');
-    console.log(req.body);
+router.post('/register', async (req, res) => {
+    const deudores = await Deudor.find().sort('-_id');
+    res.json(deudores);
+    console.log(req.body)
+    res.send('Datos guardados')
+    
+    
+    
+    // const { nombre, celular, indentificacion, valorPrestamo, correo, contraseña } = req.body;
+    // const errors = [];
+    // if(nombre <= 0 ){
+    //     errors.push({text:'Por favor digite su nombre'})
+    // }
+    // if(contraseña.length < 4){
+    //     errors.push({text: 'La contraseña debe ser al menos de 4 caracteres'})
+    // }
+    // if(errors.length > 0){
+    //     res.render('/register', {errors, nombre, indentificacion, celular, correo, valorPrestamo, contraseña})
+    // }else{
+    //     res.send('ok')
+    // }
 
-    let deudor = new Deudor(req.body)
+    
 
-    deudor.save(async (err, deudorStored) => {
-        if (err) res.status(500).send({ message: `Error al guardar en la base de datos: ${err}` })
-        res.status(200).send({ deudor: deudorStored })
-    })
+    // let deudor = new Deudor(req.body)
 
-        const {valorPrestamo, interes} = req.body
-        if(valorPrestamo && interes){
-            if(valorPrestamo => 200){
-                res.send({message: `No te prestamos mas de 200USD`})
-            } else{
-                res.status(500).send({message: `Listo para el prestamo`})
-            }if(interes < 20){
-                res.send({message: `No te prestamos a menos del 20%`})
-            }else{
-                res.status(500).send({message: `Listo para el prestamo`})
-            }
-        }
+    // deudor.save(async (err, deudorStored) => {
+    //     if (err) res.status(500).send({ message: `Error al guardar en la base de datos: ${err}` })
+    //     res.status(200).send({ deudor: deudorStored })
+    // })
 
 })
 
