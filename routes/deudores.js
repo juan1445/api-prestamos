@@ -7,7 +7,6 @@ router.get('/', async (req, res) => {
     res.json(deudores);
 });
 
-
 router.post('/', async (req, res) => {
     console.log('POST api/prestamo');
     console.log(req.body);
